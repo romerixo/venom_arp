@@ -1,6 +1,7 @@
 import color as c
 print c.INFO + 'Loading modules...' + c.CLR
 import sys
+import re
 from scapy.all import sr, ARP
 
 GATEWAY = None
@@ -49,11 +50,18 @@ def _get_range(ip_range):
 
     return ips
 
+def _is_ip(ip):
+    pattern = '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|\
+[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+
+    return re.match(pattern, ip)
+
 def check_args():
     global TARGET, GATEWAY
 
     if(len(sys.argv) == 3):
-        GATEWAY = sys.argv[1]
+        if(_is_ip(sys.argv[1])):
+            GATEWAY = sys.argv[1]
 
         # target
         for c in sys.argv[2]:
@@ -62,6 +70,10 @@ def check_args():
                 break
             else:
                 TARGET = sys.argv[2].split(',')
+        for ip in TARGET:
+            if(not _is_ip(ip)):
+                TARGET = None
+                break
 
     return (GATEWAY and TARGET)
 
@@ -103,4 +115,5 @@ def main():
         return -1
 
 if(__name__ == '__main__'):
+        print 'Before'
         main()
