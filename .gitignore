@@ -1,0 +1,11 @@
+# compiled sources #
+####################
+*.pyc
+
+# logs #
+########
+*.log
+
+# temp files #
+##############
+*~
