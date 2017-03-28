@@ -1,0 +1,10 @@
+#
+# Require manually install Wincap (for Windows):
+# https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe
+#
+-e git+https://github.com/secdev/scapy.git@21d9a01bbc2d774a22a4465361be1558fc30fbc4#egg=scapy
+pywin32
+pcap
+dnet
+pyreadline 
+
