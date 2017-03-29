@@ -121,7 +121,7 @@ def chose_interface():
                 break
         print c.ERR + 'Invalid option...' + c.CLR
     
-    IF_MAC = interfaces[int(option)]['mac']
+    IF_MAC = interfaces[option]['mac']
         
 def run():
     print c.OK + '[*] Staring arp spoofing...'
@@ -140,17 +140,15 @@ def run():
     except Exception as e:
         print c.ERR + 'A error ocurred while sending packet:'
         print str(e) + c.CLR
+        
 ################################# main #########################################
 
 def main():
     global TARGET, GATEWAY
-# Geting MAC for IP 192.168.1.100 ...
+
     if(check_args()):
         chose_interface()
         run()
-        # TODO: arp poisoning (spoofing)
-        # ->
-
     else:
         usage()
         return -1
